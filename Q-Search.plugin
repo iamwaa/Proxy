@@ -33,6 +33,6 @@
 ^https:\/\/duckduckgo\.com\/\?q=ddg\+([^&]+).+ 302 https://duckduckgo.com/?ia=about&q=$1
 ^https:\/\/duckduckgo\.com\/\?q=gh\+([^&]+).+ 302 https://github.com/search?q=$1
 ^https:\/\/duckduckgo\.com\/\?q=([^&]+).+ 302 https://www.google.com/search?q=$1
-^https:\/\/duckduckgo\.com\/\?q=cl\+([^&]+).+ 302 https://clmclm.com/search-$q-0-0-1.html
+^https:\/\/duckduckgo\.com\/\?q=cl\+([^&]+).+ 302 https://clmclm.com/search-$1-0-0-1.html
 [MitM]
 hostname = duckduckgo.com
