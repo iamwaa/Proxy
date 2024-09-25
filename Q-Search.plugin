@@ -11,10 +11,10 @@
 
 # bd = 百度搜索
 # bdimg = 百度图片搜索
-# gimg = 谷歌图片搜索
+# img = 谷歌图片搜索
 # trc = Google 译至中
 # tre = Google 译至英
-# b = Bing搜索
+# by = Bing搜索
 # wk = 维基搜索
 # qm = 七麦搜索
 # ddg = duckduckgo搜索
@@ -24,10 +24,10 @@
 
 ^https:\/\/duckduckgo\.com\/\?q=bd\+([^&]+).+ 302 https://www.baidu.com/s?wd=$1
 ^https:\/\/duckduckgo\.com\/\?q=bdimg\+([^&]+).+ 302 https://image.baidu.com/search/index?tn=baiduimage&word=$1
-^https:\/\/duckduckgo\.com\/\?q=gimg\+([^&]+).+ 302 https://www.google.com/search?&tbm=isch&q=$1
+^https:\/\/duckduckgo\.com\/\?q=img\+([^&]+).+ 302 https://www.google.com/search?&tbm=isch&q=$1
 ^https:\/\/duckduckgo\.com\/\?q=trc\+([^&]+).+ 302 https://translate.google.com/#view=home&op=translate&sl=auto&tl=zh-CN&text=$1
 ^https:\/\/duckduckgo\.com\/\?q=tre\+([^&]+).+ 302 https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=$1
-^https:\/\/duckduckgo\.com\/\?q=b\+([^&]+).+ 302 https://www.bing.com/search?q=$1
+^https:\/\/duckduckgo\.com\/\?q=by\+([^&]+).+ 302 https://www.bing.com/search?q=$1
 ^https:\/\/duckduckgo\.com\/\?q=wk\+([^&]+).+ 302 https://zh.wikipedia.org/wiki/$1
 ^https:\/\/duckduckgo\.com\/\?q=qm\+([^&]+).+ 302 https://www.qimai.cn/search/index/country/cn/search/$1
 ^https:\/\/duckduckgo\.com\/\?q=ddg\+([^&]+).+ 302 https://duckduckgo.com/?ia=about&q=$1
