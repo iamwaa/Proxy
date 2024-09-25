@@ -23,7 +23,7 @@ ddg+空格+关键词(DuckDuckGo)
 bi+空格+关键词(Bing)
 */
 
-[URL Rewrite]
+[Rewrite]
 ^https:\/\/duckduckgo\.com\/\?q=wk(\+|%20)([^&]+).+ 302 https://zh.wikipedia.org/wiki/$2
 ^https:\/\/duckduckgo\.com\/\?q=bd(\+|%20)([^&]+).+ 302 https://www.baidu.com/s?wd=$2
 ^https:\/\/duckduckgo\.com\/\?q=gh(\+|%20)([^&]+).+ 302 https://github.com/search?q=$2
