@@ -19,7 +19,7 @@
 # qm = 七麦搜索
 # ddg = duckduckgo搜索
 # gh = GitHub搜索
-# cl = 磁力猫搜索
+# cl = 磁力搜索
 # 无快捷键则默认使用Google搜索
 
 ^https:\/\/duckduckgo\.com\/\?q=bd\+([^&]+).+ 302 https://www.baidu.com/s?wd=$1
@@ -32,7 +32,7 @@
 ^https:\/\/duckduckgo\.com\/\?q=qm\+([^&]+).+ 302 https://www.qimai.cn/search/index/country/cn/search/$1
 ^https:\/\/duckduckgo\.com\/\?q=ddg\+([^&]+).+ 302 https://duckduckgo.com/?ia=about&q=$1
 ^https:\/\/duckduckgo\.com\/\?q=gh\+([^&]+).+ 302 https://github.com/search?q=$1
-^https:\/\/duckduckgo\.com\/\?q=cl\+([^&]+).+ 302 https://clmclm.com/search-$1-0-0-1.html
+^https:\/\/duckduckgo\.com\/\?q=cl\+([^&]+).+ 302 https://cili.bar/search/$1
 ^https:\/\/duckduckgo\.com\/\?q=([^&]+).+ 302 https://www.google.com/search?q=$1
 [MitM]
 hostname = duckduckgo.com
