@@ -20,7 +20,7 @@
 # ddg = duckduckgo搜索
 # gh = GitHub搜索
 # 无快捷键则默认使用Google搜索
-# cl = 磁力搜索
+# cl = 磁力猫搜索
 
 ^https:\/\/duckduckgo\.com\/\?q=bd\+([^&]+).+ 302 https://www.baidu.com/s?wd=$1
 ^https:\/\/duckduckgo\.com\/\?q=bdimg\+([^&]+).+ 302 https://image.baidu.com/search/index?tn=baiduimage&word=$1
@@ -33,6 +33,6 @@
 ^https:\/\/duckduckgo\.com\/\?q=ddg\+([^&]+).+ 302 https://duckduckgo.com/?ia=about&q=$1
 ^https:\/\/duckduckgo\.com\/\?q=gh\+([^&]+).+ 302 https://github.com/search?q=$1
 ^https:\/\/duckduckgo\.com\/\?q=([^&]+).+ 302 https://www.google.com/search?q=$1
-^https:\/\/duckduckgo\.com\/\?q=cl\+([^&]+).+ 302 https://xiongmaogb.top/search?keyword=$1
+^https:\/\/duckduckgo\.com\/\?q=cl\+([^&]+).+ 302 https://clmclm.com/search-$q-0-0-1.html
 [MitM]
 hostname = duckduckgo.com
