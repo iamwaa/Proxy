@@ -16,6 +16,7 @@
 # tre = Google 译至英
 # by = Bing搜索
 # wk = 维基搜索
+# db = 豆瓣搜索
 # qm = 七麦搜索
 # ddg = duckduckgo搜索
 # gh = GitHub搜索
@@ -29,6 +30,7 @@
 ^https:\/\/duckduckgo\.com\/\?q=tre\+([^&]+).+ 302 https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=$1
 ^https:\/\/duckduckgo\.com\/\?q=by\+([^&]+).+ 302 https://www.bing.com/search?q=$1
 ^https:\/\/duckduckgo\.com\/\?q=wk\+([^&]+).+ 302 https://zh.wikipedia.org/wiki/$1
+^https:\/\/duckduckgo.com\/\?q=db\+([^&]+).+ url 302 https://m.douban.com/search?query=$1
 ^https:\/\/duckduckgo\.com\/\?q=qm\+([^&]+).+ 302 https://www.qimai.cn/search/index/country/cn/search/$1
 ^https:\/\/duckduckgo\.com\/\?q=ddg\+([^&]+).+ 302 https://duckduckgo.com/?ia=about&q=$1
 ^https:\/\/duckduckgo\.com\/\?q=gh\+([^&]+).+ 302 https://github.com/search?q=$1
