@@ -1,13 +1,11 @@
 #!name=Q-Search
-#!desc=快捷搜索
+#!desc=Safari内输入快捷键+空格+搜索关键词快速指定搜索引擎搜索（设置更改Safari默认搜索为DuckDuckGo）
 #!homepage=https://github.com/Hyl619
 #!author=Jason
 #!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/multisearch.png
 /*
 
 [Rewrite]
-# Safari内输入快捷键+空格+搜索关键词快速指定搜索引擎搜索
-# 先进入设置更改Safari默认搜索为DuckDuckGo
 
 # bd = 百度搜索
 # bdimg = 百度图片搜索
