@@ -1,0 +1,188 @@
+p: &p
+  type: http
+  interval: 3600  
+  health-check:
+   enable: true
+   lazy: true
+   url: http://www.gstatic.com/generate_204
+   interval: 300
+
+c: &c
+  type: http
+  behavior: classical
+  interval: 86400
+
+pr: &pr
+  type: select
+  proxies:
+    - DIRECT
+    - 代理
+    - Bigme
+
+proxy-providers:
+
+  Bigme: 
+    <<: *p
+    url: 填自己订阅链接
+    path: ./proxy_provider/Bigme.yaml
+                               
+proxy-groups:
+
+  - name: 代理
+    type: select
+    proxies:
+      - DIRECT
+      - Bigme
+
+  - name: Bigme
+    type: select
+    use:
+      - Bigme
+
+  - name: SteamCN
+    <<: *pr
+
+  - name: Steam
+    <<: *pr
+
+  - name: Rockstar
+    <<: *pr
+
+  - name: EA
+    <<: *pr
+
+  - name: PikPak
+    <<: *pr
+
+  - name: 电报
+    <<: *pr
+
+  - name: 谷歌
+    <<: *pr
+
+  - name: Xbox
+    <<: *pr
+
+  - name: 微软
+    <<: *pr
+
+  - name: 苹果
+    <<: *pr
+
+  - name: Ubuntu
+    <<: *pr
+
+  - name: 国外
+    <<: *pr
+
+  - name: 其他
+    <<: *pr
+
+rule-providers:
+
+  Lan:
+    <<: *c
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml
+    path: ./rule_provider/Lan.yaml
+
+  SteamCN:
+    <<: *c
+    url: https://raw.githubusercontent.com/linger040831/rulses/main/SteamCN.yaml
+    path: ./rule_provider/SteamCN.yaml
+
+  Steam:
+    <<: *c
+    url: https://raw.githubusercontent.com/linger040831/rulses/main/Steam.yaml
+    path: ./rule_provider/Steam.yaml
+
+  Rockstar:
+    <<: *c
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Rockstar/Rockstar.yaml
+    path: ./rule_provider/Rockstar.yaml
+
+  EA:
+    <<: *c
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/EA/EA.yaml
+    path: ./rule_provider/EA.yaml
+
+  Telegram:
+    <<: *c
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml
+    path: ./rule_provider/Telegram.yaml
+
+  PikPak:
+    <<: *c
+    url: https://raw.githubusercontent.com/linger040831/rulses/main/PikPak.yaml
+    path: ./rule_provider/PikPak.yaml
+
+  Google:
+    <<: *c
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml
+    path: ./rule_provider/Google.yaml
+
+  Xbox:
+    <<: *c
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Xbox/Xbox.yaml
+    path: ./rule_provider/Xbox.yaml
+
+  Microsoft:
+    <<: *c
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml
+    path: ./rule_provider/Microsoft.yaml
+
+  Apple:
+    <<: *c
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_Classical.yaml
+    path: ./rule_provider/Apple.yaml
+
+  ApplePush:
+    <<: *c
+    url: https://raw.githubusercontent.com/linger040831/rulses/main/ApplePush.yaml
+    path: ./rule_provider/ApplePush.yaml
+
+  Ubuntu:
+    <<: *c
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Ubuntu/Ubuntu.yaml
+    path: ./rule_provider/Ubuntu.yaml
+
+  Global:
+    <<: *c
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global_Classical.yaml
+    path: ./rule_provider/Global_Classical.yaml
+
+  Lenovo:
+    <<: *c
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lenovo/Lenovo.yaml
+    path: ./rule_provider/Lenovo.yaml
+
+  Nvidia:
+    <<: *c
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Nvidia/Nvidia.yaml
+    path: ./rule_provider/Nvidia.yaml
+             
+rules:  
+#游戏
+  - RULE-SET,SteamCN,SteamCN,no-resolve  
+  - RULE-SET,Steam,Steam ,no-resolve 
+  - RULE-SET,Rockstar,Rockstar ,no-resolve 
+  - RULE-SET,EA,EA ,no-resolve 
+#PikaPak
+  - RULE-SET,PikPak,PikPak,no-resolve   
+#御三家
+  - RULE-SET,ApplePush,DIRECT,no-resolve   
+  - RULE-SET,Apple,苹果,no-resolve
+  - RULE-SET,Xbox,Xbox,no-resolve  
+  - RULE-SET,Microsoft,微软,no-resolve
+  - RULE-SET,Google,谷歌,no-resolve
+#其他
+  - RULE-SET,Telegram,电报,no-resolve  
+  - RULE-SET,Ubuntu,Ubuntu,no-resolve  
+  - RULE-SET,Lenovo,DIRECT,no-resolve 
+  - RULE-SET,Nvidia,DIRECT,no-resolve 
+#国外
+  - RULE-SET,Global,国外,no-resolve
+#直连 
+  - RULE-SET,Lan,DIRECT,no-resolve   
+  - GEOIP,CN,DIRECT
+#兜底  
+  - MATCH,其他
