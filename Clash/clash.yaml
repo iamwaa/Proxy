@@ -63,7 +63,7 @@ proxy-providers:
     <<: *a1
     url: 
     # URL后面填写格式1[单一订阅]: 直接填写你的机场Clash订阅[推荐此种方式，避免订阅泄露]
-    # URL后面填写格式2[多个订阅]：https://api.dler.io/sub?target=clash&url=请手动填入你的订阅(多机场订阅用|分割即可)&insert=false&emoji=true&list=false&tfo=false&scv=true&fdn=false&expand=true&sort=false&new_name=true
+    # URL后面填写格式2[多个订阅]：使用订阅转换工具合并订阅
     path: ./proxy_providers/tmp.yaml
     
 proxies: null
