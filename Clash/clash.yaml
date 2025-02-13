@@ -71,7 +71,7 @@ proxy-groups:
   - {name: Apple, <<: *a3}
   - {name: OpenAi, type: select, proxies: [AI节点, 美国节点]}
   - {name: AdBlock, type: select, proxies: [REJECT]}
-  - {name: 兜底分流, <<: *a3}
+  - {name: 兜底分流, type: select, proxies: [DIRECT, REJECT, 全球加速]}
   
 #节点分组
 #a2为手动选择节点
