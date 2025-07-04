@@ -31,14 +31,14 @@
 ^https:\/\/duckduckgo\.com\/\?q=tre\+([^&]+).+ 307 https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=$1
 ^https:\/\/duckduckgo\.com\/\?q=by\+([^&]+).+ 307 https://www.bing.com/search?q=$1
 ^https:\/\/duckduckgo\.com\/\?q=wk\+([^&]+).+ 307 https://zh.wikipedia.org/wiki/$1
-^https:\/\/duckduckgo.com\/\?q=db\+([^&]+).+ 307 https://m.douban.com/search?query=$1
+^https:\/\/duckduckgo\.com\/\?q=db\+([^&]+).+ 307 https://m.douban.com/search?query=$1
 ^https:\/\/duckduckgo\.com\/\?q=qm\+([^&]+).+ 307 https://www.qimai.cn/search/index/country/cn/search/$1
 ^https:\/\/duckduckgo\.com\/\?q=ddg\+([^&]+).+ 307 https://duckduckgo.com/?ia=about&q=$1
 ^https:\/\/duckduckgo\.com\/\?q=gh\+([^&]+).+ 307 https://github.com/search?q=$1
 ^https:\/\/duckduckgo\.com\/\?q=cl\+([^&]+).+ 307 https://cili.bar/search/$1
 ^https:\/\/duckduckgo\.com\/\?q=ai\+([^&]+).+ 307 https://metaso.cn/?q=$1
 ^https:\/\/duckduckgo\.com\/\?q=av\+([^&]+).+ 307 https://missav.ai/search/$1
-^https:\/\/duckduckgo\.com\/\?q=av\+([^&]+).+ 307 https://cart.bocchi.vip/?url=$1
+^https:\/\/duckduckgo\.com\/\?q=yc\+([^&]+).+ 307 https://cart.bocchi.vip/?url=$1
 #
 ^https:\/\/duckduckgo\.com\/\?q=([^&]+).+ 307 https://www.google.com/search?q=$1
 [MitM]
