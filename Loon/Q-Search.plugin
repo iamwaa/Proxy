@@ -22,6 +22,7 @@
 # ai = 秘塔AI搜索
 # av = MissAV搜索
 # yc = 验车助手
+# yp = 云盘搜索
 # 无快捷键则默认使用Google搜索
 
 ^https:\/\/duckduckgo\.com\/\?q=bd\+([^&]+).+ 307 https://www.baidu.com/s?wd=$1
@@ -39,6 +40,7 @@
 ^https:\/\/duckduckgo\.com\/\?q=ai\+([^&]+).+ 307 https://metaso.cn/?q=$1
 ^https:\/\/duckduckgo\.com\/\?q=av\+([^&]+).+ 307 https://missav.ai/search/$1
 ^https:\/\/duckduckgo\.com\/\?q=yc\+([^&]+).+ 307 https://cart.bocchi.vip/?url=$1
+^https:\/\/duckduckgo\.com\/\?q=yp\+([^&]+).+ 307 https://www.upyunso.com/search?keyword=$1
 #
 ^https:\/\/duckduckgo\.com\/\?q=([^&]+).+ 307 https://www.google.com/search?q=$1
 [MitM]
