@@ -1,0 +1,16 @@
+[Rule]
+# 影视网站
+DOMAIN-KEYWORD,vime50,DIRECT
+DOMAIN-KEYWORD,ddys,DIRECT
+# 美团
+DOMAIN,s3plus.meituan.net,DIRECT
+# 抖音
+DOMAIN-SUFFIX,snssdk.com,DIRECT
+# GitHub镜像加速
+DOMAIN-KEYWORD,ghproxy,DIRECT
+DOMAIN-KEYWORD,ghfast,DIRECT
+# 机场
+DOMAIN-KEYWORD,mojie,全球加速
+DOMAIN-KEYWORD,bigme,DIRECT
+# 其它
+DOMAIN-KEYWORD,clubsim,DIRECT
