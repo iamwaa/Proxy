@@ -1,11 +1,9 @@
 #!name=Q-Search
 #!desc=Safari内输入快捷键+空格+搜索关键词快速指定搜索引擎搜索（设置更改Safari默认搜索为DuckDuckGo）
-#!homepage=https://github.com/Waa404
+#!homepage=https://github.com/iamwaa
 #!author=Waa
 #!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/multisearch.png
 /*
-
-[Rewrite]
 
 # bd = 百度搜索
 # bdimg = 百度图片搜索
@@ -25,6 +23,7 @@
 # yp = 云盘搜索
 # 无快捷键则默认使用Google搜索
 
+[Rewrite]
 ^https:\/\/duckduckgo\.com\/\?q=bd\+([^&]+).+ 307 https://www.baidu.com/s?wd=$1
 ^https:\/\/duckduckgo\.com\/\?q=bdimg\+([^&]+).+ 307 https://image.baidu.com/search/index?tn=baiduimage&word=$1
 ^https:\/\/duckduckgo\.com\/\?q=img\+([^&]+).+ 307 https://www.google.com/search?&tbm=isch&q=$1
