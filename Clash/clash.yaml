@@ -70,7 +70,7 @@ proxy-groups:
   - {name: 哔哩哔哩, type: select, proxies: [DIRECT, 香港节点, 台湾节点]}
   - {name: Apple, type: select, proxies: [DIRECT, 全球加速, 香港节点, 美国节点]}
   - {name: Google, type: select, proxies: [DIRECT, 全球加速, 香港节点, 美国节点]}
-  - {name: OpenAi, type: select, proxies: [AI节点, 美国节点]}
+  - {name: OpenAi, type: select, proxies: [DIRECT, AI节点, 美国节点]}
   - {name: AdBlock, type: select, proxies: [REJECT]}
   - {name: 兜底分流, type: select, proxies: [DIRECT, REJECT, 全球加速]}
   
@@ -90,7 +90,7 @@ proxy-groups:
 
 # 分流规则 
 rule-providers:
-  Proxy:       {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Proxy/Proxy.yaml,                    path: ./ruleset/Proxy.yaml        }
+  Proxy:       {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.yaml,                    path: ./ruleset/Proxy.yaml        }
   BiliBili:    {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/BiliBili/BiliBili.yaml,              path: ./ruleset/BiliBili.yaml     }
   Apple:       {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple.yaml,                    path: ./ruleset/Apple.yaml        }
   Google:      {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.yaml,                  path: ./ruleset/Google.yaml       }
@@ -103,13 +103,6 @@ rule-providers:
 
 # 分流Policy 
 rules:
-  - DOMAIN-KEYWORD,ddys,DIRECT                  # 影视网站
-  - DOMAIN,vip.ffzy-online3.com,DIRECT          # 影视网站
-  - DOMAIN,ghfast.top,DIRECT                    # GitHub镜像加速
-  - DOMAIN,gh.api.99988866.xyz,DIRECT           # GitHub镜像加速
-  - DOMAIN-KEYWORD,bigme,DIRECT                 # 机场
-  - DOMAIN-KEYWORD,mojie,全球加速                # 机场
-  - DOMAIN-KEYWORD,github,全球加速
   - RULE-SET,BiliBili,哔哩哔哩
   - RULE-SET,Apple,Apple
   - RULE-SET,OpenAi,OpenAi
