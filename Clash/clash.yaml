@@ -80,7 +80,7 @@ proxy-providers:
       interval: 600
   Subscribe2:
     <<: *a1
-    url:
+    url: 
     path: ./proxy_providers/Subscribe2.yaml
     health-check:
       enable: true
@@ -98,8 +98,7 @@ proxy-groups:
   - {name: Google, type: select, proxies: [DIRECT, 全球加速, 香港节点, 美国节点]}
   - {name: OpenAi, type: select, proxies: [DIRECT, AI节点, 美国节点]}
   - {name: AdBlock, type: select, proxies: [REJECT]}
-  - {name: 国外流量, type: select, proxies: [全球加速, 自动选择, 手动切换]}
-  - {name: 兜底分流, type: select, proxies: [DIRECT, REJECT, 国外流量]}
+  - {name: 兜底分流, type: select, proxies: [DIRECT, 全球加速]}
 
   # 节点分组
   - {name: "∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ 节 点 分 组 ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨", <<: *a2, filter: "流量|期|天"}
@@ -110,24 +109,25 @@ proxy-groups:
   - {name: 狮城节点, <<: *a4, filter: "新|坡|SG|(?i)Singapore"}
   - {name: 日本节点, <<: *a4, filter: "日|东京|JP|(?i)Japan"}
   - {name: 美国节点, <<: *a4, filter: "美|US|(?i)States|American"}
-  - {name: AI节点,  <<: *a4, filter: "gpt|GPT|openai|chatgpt|claude|gemini"}
-  - {name: Emby节点, <<: *a4, filter: "emby|Emby"}
+  - {name: AI节点,  <<: *a4, filter: "(?i)gpt|openai|chatgpt|claude|gemini"}
+  - {name: Emby节点, <<: *a4, filter: "(?i)emby"}
 
 #==================== 分流规则源 ====================#
 rule-providers:
-  Proxy:       {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global.yaml, path: ./ruleset/Proxy.yaml}
-  BiliBili:    {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml, path: ./ruleset/BiliBili.yaml}
-  Apple:       {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml, path: ./ruleset/Apple.yaml}
-  Google:      {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml, path: ./ruleset/Google.yaml}
-  OpenAi:      {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml, path: ./ruleset/OpenAi.yaml}
+  Global:       {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global.yaml, path: ./ruleset/Global.yaml}
+  BiliBili:    {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml, path: ./ruleset/BiliBili.yaml}
+  Apple:       {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml, path: ./ruleset/Apple.yaml}
+  Google:      {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml, path: ./ruleset/Google.yaml}
+  OpenAi:      {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml, path: ./ruleset/OpenAi.yaml}
   Ad:          {<<: *a5, url: https://anti-ad.net/clash.yaml, path: ./ruleset/anti-ad-clash.yaml}
-  Direct:      {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Direct/Direct.yaml, path: ./ruleset/Direct.yaml}
-  Lan:         {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml, path: ./ruleset/Lan.yaml}
-  Download:    {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Download/Download.yaml, path: ./ruleset/Download.yaml}
-  ChinaIP:     {<<: *a7, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaIP/ChinaIP.yaml, path: ./ruleset/ChinaIP.yaml}
+  Direct:      {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Direct/Direct.yaml, path: ./ruleset/Direct.yaml}
+  Lan:         {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml, path: ./ruleset/Lan.yaml}
+  Download:    {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Download/Download.yaml, path: ./ruleset/Download.yaml}
+  ChinaIP:     {<<: *a7, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaIP/ChinaIP.yaml, path: ./ruleset/ChinaIP.yaml}
 
 #==================== 分流规则 ====================#
 rules:
+  - DOMAIN-KEYWORD,github,全球加速
   - RULE-SET,Lan,DIRECT
   - RULE-SET,Download,DIRECT
   - RULE-SET,Ad,AdBlock
@@ -138,5 +138,5 @@ rules:
   - RULE-SET,Direct,DIRECT
   - RULE-SET,ChinaIP,DIRECT
   - GEOIP,CN,DIRECT
-  - RULE-SET,Proxy,全球加速
+  - RULE-SET,Global,全球加速
   - MATCH,兜底分流
