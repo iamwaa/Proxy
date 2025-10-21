@@ -1,16 +1,16 @@
 #==================== 基础设置 ====================#
-port: 7890            # HTTP 代理端口
-socks-port: 7891      # SOCKS5 端口
-redir-port: 7892      # Redir 端口
-mixed-port: 7893      # 混合端口
-allow-lan: true       # 允许局域网访问
-bind-address: "*"     # 监听所有地址
-mode: rule            # 模式: rule / global / direct
-log-level: info       # 日志等级
-ipv6: false           # 关闭 IPv6（可按需开启）
+port: 7890             # HTTP 代理端口
+socks-port: 7891       # SOCKS5 端口
+redir-port: 7892       # Redir 端口
+mixed-port: 7893       # 混合端口
+allow-lan: true        # 允许局域网访问
+bind-address: "*"      # 监听所有地址
+mode: rule             # 模式: rule / global / direct
+log-level: info        # 日志等级
+ipv6: false            # 关闭 IPv6（可按需开启）
 external-controller: 127.0.0.1:9090
-external-ui: ./dashboard   # 可视化面板（如 Clash.Meta Dashboard）
-secret: ""             # 控制面板密码（可设置）
+auto-update: true      # 自动更新订阅与规则
+update-interval: 86400 # 更新间隔
 
 #==================== DNS 设置 ====================#
 dns:
