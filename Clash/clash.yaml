@@ -1,39 +1,51 @@
-port: 7890           # HTTP 代理端口
-socks-port: 7891     # Socks 端口
-redir-port: 7892     # Redir 端口
-mixed-port: 7893     # 混合端口
-allow-lan: true      # 允许局域网连接
-bind-address: "*"    # 地址绑定
-mode: rule           # 规则模式
-log-level: info      # 日志级别
-ipv6: false          # IPV6开关
+#==================== 基础设置 ====================#
+port: 7890            # HTTP 代理端口
+socks-port: 7891      # SOCKS5 端口
+redir-port: 7892      # Redir 端口
+mixed-port: 7893      # 混合端口
+allow-lan: true       # 允许局域网访问
+bind-address: "*"     # 监听所有地址
+mode: rule            # 模式: rule / global / direct
+log-level: info       # 日志等级
+ipv6: false           # 关闭 IPv6（可按需开启）
 external-controller: 127.0.0.1:9090
+external-ui: ./dashboard   # 可视化面板（如 Clash.Meta Dashboard）
+secret: ""             # 控制面板密码（可设置）
 
+#==================== DNS 设置 ====================#
 dns:
-  enable: true       # 不使用系统 DNS
-  ipv6: false        # 关闭 IPV6
-  listen: 0.0.0.0:53 # dns 监听
+  enable: true
+  ipv6: false
+  listen: 0.0.0.0:53
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - "*.lan"
-    - localhost.ptlogin2.qq.com
-    - +.srv.nintendo.net
-    - +.stun.playstation.net
-    - +.msftconnecttest.com
-    - +.msftncsi.com
-    - +.xboxlive.com
-    - msftconnecttest.com
-    - xbox.*.microsoft.com
+    - "*.local"
+    - "*.localhost"
+    - "*.localdomain"
+    - "*.example"
+    - "*.invalid"
+    - "*.test"
+    - "localhost.ptlogin2.qq.com"
+    - "+.srv.nintendo.net"
+    - "+.stun.playstation.net"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - "+.xboxlive.com"
+    - "xbox.*.microsoft.com"
     - "*.battlenet.com.cn"
     - "*.battlenet.com"
     - "*.blzstatic.cn"
     - "*.battle.net"
-  nameserver:        # 默认 DNS 服务
+  nameserver:
     - 223.5.5.5
     - 119.29.29.29
-  fallback:          # 国外 DNS 服务器
-    - https://cloudflare-dns.com/dns-query
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  fallback:
+    - https://1.1.1.1/dns-query
     - https://dns.google/dns-query
     - https://dns.alidns.com/dns-query
   fallback-filter:
@@ -41,43 +53,56 @@ dns:
     geoip-code: CN
     ipcidr:
       - 240.0.0.0/4
-#========= 建立锚点 =========#
+    domain:
+      - '+.google.com'
+      - '+.facebook.com'
+      - '+.youtube.com'
+      - '+.twitter.com'
 
-# 策略组引用
-pr:   &a3 {type: select,   proxies: [DIRECT, 香港节点, 台湾节点, 狮城节点, 日本节点, 美国节点, 自动选择, 手动切换] }
-p:    &a1 {type: http,     interval: 86400,  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 1800} }
-auto: &a4 {type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [Subscribe1, Subscribe2] }
-use:  &a2 {type: select,   use: [Subscribe1, Subscribe2] }
-c:    &a6 {type: http,     behavior: classical, interval: 86400}
-d:    &a5 {type: http,     behavior: domain,    interval: 86400}
-i:    &a7 {type: http,     behavior: ipcidr,    interval: 86400}
+#==================== 锚点定义 ====================#
+pr:   &a3 {type: select, proxies: [DIRECT, 香港节点, 台湾节点, 狮城节点, 日本节点, 美国节点, 自动选择, 手动切换]}
+p:    &a1 {type: http, interval: 86400, health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 1800}}
+auto: &a4 {type: url-test, lazy: true, url: http://www.gstatic.com/generate_204, interval: 900, use: [Subscribe1, Subscribe2]}
+use:  &a2 {type: select, use: [Subscribe1, Subscribe2]}
+c:    &a6 {type: http, behavior: classical, interval: 86400}
+d:    &a5 {type: http, behavior: domain, interval: 86400}
+i:    &a7 {type: http, behavior: ipcidr, interval: 86400}
 
+#==================== 代理订阅 ====================#
 proxy-providers:
- # 在URL填写你的机场Clash订阅
   Subscribe1:
     <<: *a1
-    url:
+    url: 
     path: ./proxy_providers/Subscribe1.yaml
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 600
   Subscribe2:
     <<: *a1
-    url: 
+    url:
     path: ./proxy_providers/Subscribe2.yaml
-    
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 600
+
 proxies: null
+
+#==================== 策略分组 ====================#
 proxy-groups:
-#分流分组
+  # 主分流组
   - {name: 全球加速, <<: *a3}
   - {name: 哔哩哔哩, type: select, proxies: [DIRECT, 香港节点, 台湾节点]}
   - {name: Apple, type: select, proxies: [DIRECT, 全球加速, 香港节点, 美国节点]}
   - {name: Google, type: select, proxies: [DIRECT, 全球加速, 香港节点, 美国节点]}
   - {name: OpenAi, type: select, proxies: [DIRECT, AI节点, 美国节点]}
   - {name: AdBlock, type: select, proxies: [REJECT]}
-  - {name: 兜底分流, type: select, proxies: [DIRECT, REJECT, 全球加速]}
-  
-#节点分组
-#a2为手动选择节点
-#a4为自动选择延迟最低的节点
-  - {name: "∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ 节 点 分 组 ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨", <<: *a2, filter: "流量|期|天" }
+  - {name: 国外流量, type: select, proxies: [全球加速, 自动选择, 手动切换]}
+  - {name: 兜底分流, type: select, proxies: [DIRECT, REJECT, 国外流量]}
+
+  # 节点分组
+  - {name: "∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ 节 点 分 组 ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨", <<: *a2, filter: "流量|期|天"}
   - {name: 自动选择, <<: *a4}
   - {name: 手动切换, <<: *a2}
   - {name: 香港节点, <<: *a4, filter: "港|HK|(?i)Hong"}
@@ -85,31 +110,31 @@ proxy-groups:
   - {name: 狮城节点, <<: *a4, filter: "新|坡|SG|(?i)Singapore"}
   - {name: 日本节点, <<: *a4, filter: "日|东京|JP|(?i)Japan"}
   - {name: 美国节点, <<: *a4, filter: "美|US|(?i)States|American"}
-  - {name: AI节点,  <<: *a4, filter: "gpt|GPT"}                
+  - {name: AI节点,  <<: *a4, filter: "gpt|GPT|openai|chatgpt|claude|gemini"}
   - {name: Emby节点, <<: *a4, filter: "emby|Emby"}
 
-# 分流规则 
+#==================== 分流规则源 ====================#
 rule-providers:
-  Proxy:       {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.yaml,                    path: ./ruleset/Proxy.yaml        }
-  BiliBili:    {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/BiliBili/BiliBili.yaml,              path: ./ruleset/BiliBili.yaml     }
-  Apple:       {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple.yaml,                    path: ./ruleset/Apple.yaml        }
-  Google:      {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.yaml,                  path: ./ruleset/Google.yaml       }
-  OpenAi:      {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OpenAI/OpenAI.yaml,                  path: ./ruleset/OpenAi.yaml       }
-  Ad:          {<<: *a5, url: https://anti-ad.net/clash.yaml,                                                                                                                     path: ./ruleset/anti-ad-clash.yaml}
-  Direct:      {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Direct/Direct.yaml,                  path: ./ruleset/Direct.yaml       }
-  Lan:         {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Lan/Lan.yaml,                        path: ./ruleset/Lan.yaml          }
-  Download:    {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Download/Download.yaml,              path: ./ruleset/Download.yaml     }
-  ChinaIP:     {<<: *a7, url: https://ghfast.top/https://raw.githubusercontent.com/soffchen/GeoIP2-CN/release/clash-rule-provider.yml,                                            path: ./ruleset/ChinaIP.yaml      }
+  Proxy:       {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global.yaml, path: ./ruleset/Proxy.yaml}
+  BiliBili:    {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml, path: ./ruleset/BiliBili.yaml}
+  Apple:       {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml, path: ./ruleset/Apple.yaml}
+  Google:      {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml, path: ./ruleset/Google.yaml}
+  OpenAi:      {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml, path: ./ruleset/OpenAi.yaml}
+  Ad:          {<<: *a5, url: https://anti-ad.net/clash.yaml, path: ./ruleset/anti-ad-clash.yaml}
+  Direct:      {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Direct/Direct.yaml, path: ./ruleset/Direct.yaml}
+  Lan:         {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml, path: ./ruleset/Lan.yaml}
+  Download:    {<<: *a6, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Download/Download.yaml, path: ./ruleset/Download.yaml}
+  ChinaIP:     {<<: *a7, url: https://ghfast.top/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaIP/ChinaIP.yaml, path: ./ruleset/ChinaIP.yaml}
 
-# 分流Policy 
+#==================== 分流规则 ====================#
 rules:
+  - RULE-SET,Lan,DIRECT
+  - RULE-SET,Download,DIRECT
+  - RULE-SET,Ad,AdBlock
   - RULE-SET,BiliBili,哔哩哔哩
   - RULE-SET,Apple,Apple
   - RULE-SET,OpenAi,OpenAi
   - RULE-SET,Google,Google
-  - RULE-SET,Ad,AdBlock
-  - RULE-SET,Lan,DIRECT
-  - RULE-SET,Download,DIRECT
   - RULE-SET,Direct,DIRECT
   - RULE-SET,ChinaIP,DIRECT
   - GEOIP,CN,DIRECT
