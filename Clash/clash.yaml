@@ -139,10 +139,10 @@ rules:
   - RULE-SET,Lan,DIRECT
   - RULE-SET,Download,DIRECT
   - RULE-SET,Ad,AdBlock
-  - RULE-SET,BiliBili,哔哩哔哩
   - RULE-SET,Apple,Apple
-  - RULE-SET,Google,Google
+  - RULE-SET,BiliBili,哔哩哔哩
   - RULE-SET,GitHub,全球加速
+  - RULE-SET,Google,Google
   - RULE-SET,OpenAi,OpenAi
   - RULE-SET,Direct,DIRECT
   - RULE-SET,ChinaIPs_IP,DIRECT
