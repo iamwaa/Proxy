@@ -9,7 +9,7 @@ mode: rule             # 模式: rule / global / direct
 log-level: info        # 日志等级
 ipv6: false            # 关闭 IPv6（可按需开启）
 external-controller: 127.0.0.1:9090
-auto-update: true      # 自动更新订阅与规则
+auto-update: true      # 自动更新订阅与规则（Clash Verge 专属）
 update-interval: 86400 # 更新间隔
 
 #==================== DNS 设置 ====================#
@@ -40,6 +40,8 @@ dns:
     - "*.battle.net"
     - "+.apple.com"
     - "+.icloud.com"
+    - "time.*.com"
+    - "time.*.apple.com"
   nameserver:
     - 1.1.1.1
     - 8.8.8.8
@@ -78,7 +80,7 @@ i:    &a7 {type: http, behavior: ipcidr, interval: 86400}
 proxy-providers:
   Subscribe1:
     <<: *a1
-    url: 
+    url: # ← 在此填写你的订阅地址
     path: ./proxy_providers/Subscribe1.yaml
     health-check:
       enable: true
@@ -86,7 +88,7 @@ proxy-providers:
       interval: 600
   Subscribe2:
     <<: *a1
-    url: 
+    url: # ← 在此填写你的订阅地址
     path: ./proxy_providers/Subscribe2.yaml
     health-check:
       enable: true
@@ -110,37 +112,38 @@ proxy-groups:
   - {name: "∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ 节 点 分 组 ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨", <<: *a2, filter: "流量|期|天"}
   - {name: 自动选择, <<: *a4}
   - {name: 手动切换, <<: *a2}
-  - {name: 香港节点, <<: *a4, filter: "港|HK|(?i)Hong"}
-  - {name: 台湾节点, <<: *a4, filter: "台|湾|TW|(?i)Taiwan"}
-  - {name: 狮城节点, <<: *a4, filter: "新|坡|SG|(?i)Singapore"}
-  - {name: 日本节点, <<: *a4, filter: "日|东京|JP|(?i)Japan"}
-  - {name: 美国节点, <<: *a4, filter: "美|US|(?i)States|American"}
-  - {name: AI节点,  <<: *a4, filter: "(?i)gpt|openai|chatgpt|claude|gemini"}
-  - {name: Emby节点, <<: *a4, filter: "(?i)emby"}
+  - {name: 香港节点, <<: *a4, filter: "港|HK|(?i)(Hong)"}
+  - {name: 台湾节点, <<: *a4, filter: "台|湾|TW|(?i)(Taiwan)"}
+  - {name: 狮城节点, <<: *a4, filter: "新|坡|SG|(?i)(Singapore)"}
+  - {name: 日本节点, <<: *a4, filter: "日|东京|JP|(?i)(Japan)"}
+  - {name: 美国节点, <<: *a4, filter: "美|US|(?i)(States|American)"}
+  - {name: AI节点,  <<: *a4, proxies: [DIRECT], filter: "(?i)(gpt|openai|chatgpt|claude|gemini)"}
+  - {name: Emby节点, <<: *a4, proxies: [DIRECT], filter: "(?i)(emby)"}
 
 #==================== 分流规则源 ====================#
 rule-providers:
-  Global:       {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global.yaml, path: ./ruleset/Global.yaml}
-  BiliBili:    {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml, path: ./ruleset/BiliBili.yaml}
-  Apple:       {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml, path: ./ruleset/Apple.yaml}
-  Google:      {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml, path: ./ruleset/Google.yaml}
-  OpenAi:      {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml, path: ./ruleset/OpenAi.yaml}
-  Ad:          {<<: *a5, url: https://anti-ad.net/clash.yaml, path: ./ruleset/anti-ad-clash.yaml}
-  Direct:      {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Direct/Direct.yaml, path: ./ruleset/Direct.yaml}
-  Lan:         {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml, path: ./ruleset/Lan.yaml}
-  Download:    {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Download/Download.yaml, path: ./ruleset/Download.yaml}
-  ChinaIPs_IP:     {<<: *a7, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/ChinaIPs/ChinaIPs_IP.yaml, path: ./ruleset/ChinaIPs_IP.yaml}
+  Ad:         {<<: *a5, url: https://anti-ad.net/clash.yaml, path: ./ruleset/anti-ad-clash.yaml}
+  Apple:      {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml, path: ./ruleset/Apple.yaml}
+  BiliBili:   {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml, path: ./ruleset/BiliBili.yaml}
+  ChinaIPs_IP:{<<: *a7, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaIPs/ChinaIPs_IP.yaml, path: ./ruleset/ChinaIPs_IP.yaml}
+  Direct:     {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Direct/Direct.yaml, path: ./ruleset/Direct.yaml}
+  Download:   {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Download/Download.yaml, path: ./ruleset/Download.yaml}
+  GitHub:     {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.yaml, path: ./ruleset/GitHub.yaml}
+  Global:     {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global.yaml, path: ./ruleset/Global.yaml}
+  Google:     {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml, path: ./ruleset/Google.yaml}
+  Lan:        {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml, path: ./ruleset/Lan.yaml}
+  OpenAi:     {<<: *a6, url: https://proxy.lalifeier.eu.org/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml, path: ./ruleset/OpenAi.yaml}
 
 #==================== 分流规则 ====================#
 rules:
-  - DOMAIN-KEYWORD,github,全球加速
   - RULE-SET,Lan,DIRECT
   - RULE-SET,Download,DIRECT
   - RULE-SET,Ad,AdBlock
   - RULE-SET,BiliBili,哔哩哔哩
   - RULE-SET,Apple,Apple
-  - RULE-SET,OpenAi,OpenAi
   - RULE-SET,Google,Google
+  - RULE-SET,GitHub,全球加速
+  - RULE-SET,OpenAi,OpenAi
   - RULE-SET,Direct,DIRECT
   - RULE-SET,ChinaIPs_IP,DIRECT
   - GEOIP,CN,DIRECT
