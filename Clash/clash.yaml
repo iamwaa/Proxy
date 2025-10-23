@@ -117,8 +117,8 @@ proxy-groups:
   - {name: 狮城节点, <<: *a4, filter: "新|坡|SG|(?i)(Singapore)"}
   - {name: 日本节点, <<: *a4, filter: "日|东京|JP|(?i)(Japan)"}
   - {name: 美国节点, <<: *a4, filter: "美|US|(?i)(States|American)"}
-  - {name: AI节点,  <<: *a4, proxies: [DIRECT], filter: "(?i)(gpt|openai|chatgpt|claude|gemini)"}
-  - {name: Emby节点, <<: *a4, proxies: [DIRECT], filter: "(?i)(emby)"}
+  - {name: AI节点,  <<: *a4, filter: "(?i)(gpt|openai|chatgpt|claude|gemini)"}
+  - {name: Emby节点, <<: *a4, filter: "(?i)(emby)"}
 
 #==================== 分流规则源 ====================#
 rule-providers:
