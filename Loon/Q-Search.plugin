@@ -21,6 +21,7 @@
 # av = MissAV搜索
 # yc = 验车助手
 # yp = 云盘搜索
+# bl = 51爆料搜索
 # 无快捷键则默认使用Google搜索
 
 [Rewrite]
@@ -40,6 +41,7 @@
 ^https:\/\/duckduckgo\.com\/\?q=av\+([^&]+).+ 307 https://missav.ai/search/$1
 ^https:\/\/duckduckgo\.com\/\?q=yc\+([^&]+).+ 307 https://cart.bocchi.vip/?url=$1
 ^https:\/\/duckduckgo\.com\/\?q=yp\+([^&]+).+ 307 https://www.upyunso.com/search?keyword=$1
+^https:\/\/duckduckgo\.com\/\?q=bl\+([^&]+).+ 307 https://www.51baoliao01.com/search/$1
 #
 ^https:\/\/duckduckgo\.com\/\?q=([^&]+).+ 307 https://www.google.com/search?q=$1
 [MitM]
