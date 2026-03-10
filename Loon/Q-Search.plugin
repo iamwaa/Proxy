@@ -8,8 +8,8 @@
 # bd = 百度搜索
 # bdimg = 百度图片搜索
 # img = 谷歌图片搜索
-# trc = Google 译至中
-# tre = Google 译至英
+# trc = 译至中
+# tre = 译至英
 # by = Bing搜索
 # wk = 维基搜索
 # db = 豆瓣搜索
@@ -28,8 +28,8 @@
 ^https:\/\/duckduckgo\.com\/\?q=bd\+([^&]+).+ 307 https://www.baidu.com/s?wd=$1
 ^https:\/\/duckduckgo\.com\/\?q=bdimg\+([^&]+).+ 307 https://image.baidu.com/search/index?tn=baiduimage&word=$1
 ^https:\/\/duckduckgo\.com\/\?q=img\+([^&]+).+ 307 https://www.google.com/search?&tbm=isch&q=$1
-^https:\/\/duckduckgo\.com\/\?q=trc\+([^&]+).+ 307 https://translate.google.com/?sl=auto&tl=zh-CN&text=$1&op=translate
-^https:\/\/duckduckgo\.com\/\?q=tre\+([^&]+).+ 307 https://translate.google.com/?sl=auto&tl=en&text=$1&op=translate
+^https:\/\/duckduckgo\.com\/\?q=trc\+([^&]+).+ 307 https://lingva.ml/auto/zh/$1
+^https:\/\/duckduckgo\.com\/\?q=tre\+([^&]+).+ 307 https://lingva.ml/auto/en/$1
 ^https:\/\/duckduckgo\.com\/\?q=by\+([^&]+).+ 307 https://www.bing.com/search?q=$1
 ^https:\/\/duckduckgo\.com\/\?q=wk\+([^&]+).+ 307 https://zh.wikipedia.org/wiki/$1
 ^https:\/\/duckduckgo\.com\/\?q=db\+([^&]+).+ 307 https://m.douban.com/search?query=$1
