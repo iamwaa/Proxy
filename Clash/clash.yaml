@@ -103,8 +103,8 @@ proxy-groups:
   - {name: 全球加速, <<: *a3}
   - {name: 哔哩哔哩, type: select, proxies: [DIRECT, 香港节点, 台湾节点]}
   - {name: Apple, type: select, proxies: [DIRECT, 全球加速, 香港节点, 美国节点]}
-  - {name: Google, type: select, proxies: [DIRECT, 全球加速, 香港节点, 美国节点]}
-  - {name: AI, type: select, proxies: [DIRECT, AI节点, 美国节点]}
+  - {name: Google, type: select, proxies: [全球加速, 香港节点, 美国节点, DIRECT]}
+  - {name: AI, type: select, proxies: [美国节点, 狮城节点, AI节点, DIRECT]}
   - {name: AdBlock, type: select, proxies: [REJECT]}
   - {name: 兜底分流, type: select, proxies: [DIRECT, 全球加速]}
 
@@ -117,7 +117,7 @@ proxy-groups:
   - {name: 狮城节点, <<: *a4, filter: "新|坡|SG|(?i)(Singapore)"}
   - {name: 日本节点, <<: *a4, filter: "日|东京|JP|(?i)(Japan)"}
   - {name: 美国节点, <<: *a4, filter: "美|US|(?i)(States|American)"}
-  - {name: AI节点,  <<: *a4, filter: "(?i)(gpt|openai|chatgpt|claude|gemini)"}
+  - {name: AI节点,  <<: *a4, filter: "(?i)(gpt|openai|claude|gemini)"}
   - {name: Emby节点, <<: *a4, filter: "(?i)(emby)"}
 
 #==================== 分流规则源 ====================#
