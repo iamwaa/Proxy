@@ -68,7 +68,7 @@ dns:
       - '+.twitter.com'
 
 #==================== 锚点定义 ====================#
-pr:   &a3 {type: select, proxies: [DIRECT, 香港节点, 台湾节点, 狮城节点, 日本节点, 美国节点, 自动选择, 手动切换]}
+pr:   &a3 {type: select, proxies: [香港节点, 台湾节点, 狮城节点, 日本节点, 美国节点, 自动选择, 手动切换, DIRECT]}
 p:    &a1 {type: http, interval: 86400, health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 1800}}
 auto: &a4 {type: url-test, lazy: true, url: http://www.gstatic.com/generate_204, interval: 600, use: [Subscribe1, Subscribe2]}
 use:  &a2 {type: select, use: [Subscribe1, Subscribe2]}
@@ -104,7 +104,7 @@ proxy-groups:
   - {name: 哔哩哔哩, type: select, proxies: [DIRECT, 香港节点, 台湾节点]}
   - {name: Apple, type: select, proxies: [DIRECT, 全球加速, 香港节点, 美国节点]}
   - {name: Google, type: select, proxies: [全球加速, 香港节点, 美国节点, DIRECT]}
-  - {name: AI, type: select, proxies: [美国节点, 狮城节点, AI节点, DIRECT]}
+  - {name: AI, type: select, proxies: [美国节点, 狮城节点, 香港节点, 日本节点, AI节点, DIRECT]}
   - {name: AdBlock, type: select, proxies: [REJECT]}
   - {name: 兜底分流, type: select, proxies: [DIRECT, 全球加速]}
 
